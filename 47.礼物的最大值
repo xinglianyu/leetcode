@@ -1,0 +1,17 @@
+class Solution(object):
+    def maxValue(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        for i in range(len(grid),0,-1):
+            for j in range(len(grid[0]),0,-1):
+                if(j!=len(grid[0]) and i!=len(grid)):
+                    grid[i-1][j-1]=max(grid[i-1][j],grid[i][j-1])+grid[i-1][j-1]
+                elif(j==len(grid[0]) and i==len(grid)):
+                    continue
+                elif(i==len(grid)):
+                    grid[i-1][j-1]=grid[i-1][j-1]+grid[i-1][j]
+                else:
+                    grid[i-1][j-1]=grid[i-1][j-1]+grid[i][j-1]
+        return grid[0][0]
