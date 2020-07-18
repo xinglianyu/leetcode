@@ -1,0 +1,48 @@
+#8.74 100
+class Solution:
+    def fractionAddition(self, expression: str) -> str:
+        def Rdata(a):
+            cxc=[]
+            f='+'
+            c='0'
+            e=0
+            for i in a:
+                if('0'<=i<='9'):
+                    c=c+i
+                elif i=='/':
+                    e=int(c)
+                    if f=='-':
+                        e=-1*e
+                        f='+'
+                    c='0'
+                elif(i=='+'):
+                    cxc.append([e,int(c)])
+                    e=0
+                    c='0'
+                else:
+                    f='-'
+                    if len(cxc)!=0 or e!=0:
+                        cxc.append([e,int(c)])
+                        e=0
+                        c='0'
+            cxc.append([e,int(c)])
+            return cxc
+        def hj(a,b):
+            if (a/b==int(a/b)):
+                return b
+            if (b/a==int(b/a)):
+                return a
+            Sum=1
+            for i in range(2,int(min(abs(a),abs(b))/2)):
+                if (a/i==int(a/i) and b/i==int(b/i)):
+                   Sum=i
+            return Sum
+        a=Rdata(expression)
+        ss=1
+        for i in a:
+           ss=ss*i[1]
+        sss=0
+        for i in a:
+            sss=sss+i[0]*ss/i[1]
+        cy=abs(hj(sss,ss))
+        return(str(int(sss/cy))+'/'+str(int(ss/cy)))
